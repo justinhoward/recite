@@ -1,0 +1,23 @@
+{
+  "name": "recite",
+  "version": "0.0.1",
+  "description": "A flexible HTTP library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "http",
+    "ajax",
+    "xmlhttprequest"
+  ],
+  "author": "Justin Howard <jmhoward0@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "hoopla": "^0.1.1"
+  }
+}
