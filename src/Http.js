@@ -3,6 +3,7 @@ var Hoopla = require('hoopla');
 var Request = require('./messages/Request');
 var HttpRequestEvent = require('./HttpRequestEvent');
 var HttpResponseEvent = require('./HttpResponseEvent');
+var encodeAttributes = require('./utility/encodeAttributes');
 
 function Http(driver, dispatcher) {
     if (!dispatcher) {
@@ -20,22 +21,11 @@ proto.request = function(method, url, contents, headers) {
 };
 
 proto.get = function(url, attributes, headers) {
-    this.request('GET', url + '?' + this.encodeAttributes(attributes), headers);
+    return this.request('GET', url + '?' + encodeAttributes(attributes), headers);
 };
 
 proto.post = function(url, contents, headers) {
     return this.request('POST', url, contents, headers);
-};
-
-proto.postJson = function(url, contents, headers) {
-    if (typeof contents !== 'string') {
-        contents = JSON.stringify(contents);
-    }
-    var request = this.request(url, contents, headers);
-    headers = request.getHeaders();
-    headers.set('content-type', 'application/json');
-    headers.set('accept', 'application/json');
-    return request;
 };
 
 proto.send = function(request) {
@@ -48,14 +38,8 @@ proto.send = function(request) {
     });
 };
 
-proto.encodeAttributes = function(attributes) {
-    var encoded = [], attr;
-    for (attr in attributes) {
-        if (attributes.hasOwnProperty(attr)) {
-            encoded.push(encodeURIComponent(attr) + '=' + encodeURIComponent(attributes[attr]));
-        }
-    }
-    return encoded.join('&');
+proto.getDispatcher = function() {
+    return this._dispatcher;
 };
 
 function dispatchRequest(self, request) {

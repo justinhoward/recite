@@ -1,5 +1,4 @@
 'use strict';
-
 var Http = require('./src/Http');
 
 Http.Promise = global.Promise;
@@ -16,6 +15,10 @@ Http.driver = {
 Http.event = {
     HttpRequestEvent: require('./src/events/HttpRequestEvent'),
     HttpResponseEvent: require('./src/events/HttpResponseEvent')
+};
+
+Http.extensions = {
+    json: require('./extensions/json')
 };
 
 module.exports = Http;

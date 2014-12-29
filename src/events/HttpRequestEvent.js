@@ -4,7 +4,7 @@ var Event = require('hoopla/src/Event');
 
 function HttpRequestEvent(request, attributes) {
     this._request = request;
-    Event.call(this, 'HttpRequestEvent', attributes);
+    Event.call(this, 'HttpRequest', attributes);
 }
 inherits(HttpRequestEvent, Event);
 var proto = HttpRequestEvent.prototype;

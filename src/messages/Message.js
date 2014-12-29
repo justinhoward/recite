@@ -15,8 +15,18 @@ proto.getContents = function() {
     return this._contents;
 };
 
+proto.setContents = function(contents) {
+    this._contents = contents;
+    return this;
+};
+
 proto.getHeaders = function() {
     return this._headers;
+};
+
+proto.setHeaders = function(headers) {
+    this._headers = headers;
+    return this;
 };
 
 module.exports = Message;

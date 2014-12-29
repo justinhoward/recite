@@ -13,6 +13,11 @@ proto.getUrl = function() {
     return this._url;
 };
 
+proto.setUrl = function(url) {
+    this._url = url;
+    return this;
+};
+
 proto.setHttp = function(http) {
     this._http = http;
     return this;

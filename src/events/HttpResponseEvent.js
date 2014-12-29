@@ -4,7 +4,7 @@ var HttpRequestEvent = require('./HttpRequestEvent');
 
 function HttpResponseEvent(request, response, attributes) {
     this._response = response;
-    HttpRequestEvent.call(this, 'HttpResponseEvent', request, attributes);
+    HttpRequestEvent.call(this, 'HttpResponse', request, attributes);
 }
 inherits(HttpResponseEvent, HttpRequestEvent);
 var proto = HttpResponseEvent.prototype;

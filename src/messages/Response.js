@@ -18,4 +18,9 @@ proto.getStatus = function() {
     return this._status;
 };
 
+proto.setStatus = function(status) {
+    this._status = status;
+    return this;
+};
+
 module.exports = Response;
