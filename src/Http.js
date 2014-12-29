@@ -13,10 +13,6 @@ function Http(driver, dispatcher) {
 }
 var proto = Http.prototype;
 
-if (global.Promise) {
-    Http.Promise = global.Promise;
-}
-
 proto.request = function(method, url, contents, headers) {
     var request = new Request(method, url, contents, headers);
     request.setHttp(this);
