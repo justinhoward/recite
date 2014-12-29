@@ -1,7 +1,7 @@
 {
   "name": "recite",
   "version": "0.0.1",
-  "description": "A flexible HTTP library",
+  "description": "An object oriented HTTP library",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
