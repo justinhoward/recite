@@ -1,7 +1,8 @@
 'use strict';
+var isPlainObject = require('./isPlainObject');
 
 module.exports = function(object) {
-    if ('' + object === '[object Object]') {
+    if (!isPlainObject(object)) {
         return false;
     }
 

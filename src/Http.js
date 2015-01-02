@@ -5,6 +5,7 @@ var Response = require('./messages/Response');
 var HttpRequestEvent = require('./events/HttpRequestEvent');
 var HttpResponseEvent = require('./events/HttpResponseEvent');
 var encodeAttributes = require('./utilities/encodeAttributes');
+var isPlainObject = require('./utilities/isPlainObject');
 var isEmptyObject = require('./utilities/isEmptyObject');
 
 function Http(driver, dispatcher) {
@@ -23,7 +24,7 @@ proto.request = function(method, url, contents, headers) {
 };
 
 proto.get = function(url, attributes, headers) {
-    if (!isEmptyObject(attributes)) {
+    if (isPlainObject(attributes) && !isEmptyObject(attributes)) {
         url = url + '?' + encodeAttributes(attributes);
     }
 
