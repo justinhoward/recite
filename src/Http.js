@@ -4,8 +4,8 @@ var Request = require('./messages/Request');
 var Response = require('./messages/Response');
 var HttpRequestEvent = require('./events/HttpRequestEvent');
 var HttpResponseEvent = require('./events/HttpResponseEvent');
-var encodeAttributes = require('./utility/encodeAttributes');
-var isEmptyObject = require('./utility/isEmptyObject');
+var encodeAttributes = require('./utilities/encodeAttributes');
+var isEmptyObject = require('./utilities/isEmptyObject');
 
 function Http(driver, dispatcher) {
     if (!dispatcher) {
