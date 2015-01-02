@@ -1,9 +1,11 @@
 'use strict';
 var Hoopla = require('hoopla');
 var Request = require('./messages/Request');
-var HttpRequestEvent = require('./HttpRequestEvent');
-var HttpResponseEvent = require('./HttpResponseEvent');
+var Response = require('./messages/Response');
+var HttpRequestEvent = require('./events/HttpRequestEvent');
+var HttpResponseEvent = require('./events/HttpResponseEvent');
 var encodeAttributes = require('./utility/encodeAttributes');
+var isEmptyObject = require('./utility/isEmptyObject');
 
 function Http(driver, dispatcher) {
     if (!dispatcher) {
@@ -21,7 +23,11 @@ proto.request = function(method, url, contents, headers) {
 };
 
 proto.get = function(url, attributes, headers) {
-    return this.request('GET', url + '?' + encodeAttributes(attributes), headers);
+    if (!isEmptyObject(attributes)) {
+        url = url + '?' + encodeAttributes(attributes);
+    }
+
+    return this.request('GET', url, null, headers);
 };
 
 proto.post = function(url, contents, headers) {
@@ -31,10 +37,19 @@ proto.post = function(url, contents, headers) {
 proto.send = function(request) {
     var self = this;
     request = dispatchRequest(self, request);
-    return this._driver.send(request).then(function(response) {
-        return dispatchResponse(self, request, response);
-    }, function(response) {
-        return Http.Promise.reject(dispatchResponse(self, request, response));
+    return new Http.Promise(function(resolve, reject) {
+        self._driver.send(request, function(response) {
+            if (!(response instanceof Response)) {
+                throw new Error('send callback must be called with a Response instance');
+            }
+
+            response = dispatchResponse(self, response);
+            if (response.isSuccessful()) {
+                resolve(response);
+            } else {
+                reject(response);
+            }
+        });
     });
 };
 
@@ -48,8 +63,8 @@ function dispatchRequest(self, request) {
     return event.getRequest();
 }
 
-function dispatchResponse(self, request, response) {
-    var event = new HttpResponseEvent(request, response);
+function dispatchResponse(self, response) {
+    var event = new HttpResponseEvent(response);
     self._dispatcher.dispatch(event);
     return event.getResponse();
 }

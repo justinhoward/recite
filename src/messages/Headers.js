@@ -7,7 +7,7 @@ function Headers(headers) {
 var proto = Headers.prototype;
 
 proto.get = function(name) {
-    return this._headers[name];
+    return this._headers[name.toLowerCase()];
 };
 
 proto.set = function(name, contents) {

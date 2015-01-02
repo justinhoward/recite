@@ -2,12 +2,22 @@
 var inherits = require('inherits');
 var Message = require('./Message');
 
-function Request(url, contents, headers) {
+function Request(method, url, contents, headers) {
     Message.call(this, contents, headers);
+    this._method = method;
     this._url = url;
 }
 inherits(Request, Message);
 var proto = Request.prototype;
+
+proto.getMethod = function() {
+    return this._method;
+};
+
+proto.setMethod = function(method) {
+    this._method = method;
+    return this;
+};
 
 proto.getUrl = function() {
     return this._url;
@@ -26,7 +36,7 @@ proto.setHttp = function(http) {
 proto.send = function() {
     if (!this._http) {
         throw new Error(
-            'Cannot send a detached request. Use the setHttp method or a Http request method.'
+            'Cannot send a detached request. Use the setHttp method or an Http request method.'
         );
     }
 
