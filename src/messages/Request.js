@@ -4,8 +4,8 @@ var Message = require('./Message');
 
 function Request(method, url, contents, headers) {
     Message.call(this, contents, headers);
-    this._method = method;
     this._url = url;
+    this.setMethod(method);
 }
 inherits(Request, Message);
 var proto = Request.prototype;
@@ -15,7 +15,7 @@ proto.getMethod = function() {
 };
 
 proto.setMethod = function(method) {
-    this._method = method;
+    this._method = method.toUpperCase();
     return this;
 };
 
