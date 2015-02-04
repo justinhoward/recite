@@ -18,7 +18,7 @@ Http.event = {
 };
 
 Http.extensions = {
-    json: require('./extensions/json')
+    JsonExtension: require('./src/extensions/JsonExtension')
 };
 
 module.exports = Http;
