@@ -58,6 +58,12 @@ proto.getDispatcher = function() {
     return this._dispatcher;
 };
 
+proto.addExtension = function(extension) {
+    if (extension.register) {
+        extension.register(this);
+    }
+};
+
 function dispatchRequest(self, request) {
     var event = new HttpRequestEvent(request);
     self._dispatcher.dispatch(event);

@@ -1,16 +1,36 @@
 'use strict';
 
-var postJson = function(url, contents, headers) {
-    var request = this.post(url, contents, headers);
-    return requestToJson(request);
-};
+function JsonExtension() {
+
+}
+var proto = JsonExtension.prototype;
 
 var getJson = function(url, attributes, headers) {
     var request = this.get(url, attributes, headers);
     return requestToJson(request);
 };
 
-var httpRequestListener = function(event) {
+var postJson = function(url, contents, headers) {
+    var request = this.post(url, contents, headers);
+    return requestToJson(request);
+};
+
+proto.register = function(http) {
+    this.addListeners(http.getDispatcher());
+    if (!http.getJson) {
+        http.getJson = getJson;
+    }
+    if (!http.postJson) {
+        http.postJson = postJson;
+    }
+};
+
+proto.addListeners = function(dispatcher) {
+    dispatcher.addListener('http.request', JsonExtension.httpRequestListener);
+    dispatcher.addListener('http.response', JsonExtension.httpResponseListener);
+};
+
+JsonExtension.httpRequestListener = function(event) {
     var request = event.getRequest();
     if (request.getHeaders().get('content-type') === 'application/json') {
         var contents = request.getContents();
@@ -20,7 +40,7 @@ var httpRequestListener = function(event) {
     }
 };
 
-var httpResponseListener = function(event) {
+JsonExtension.httpResponseListener = function (event) {
     var response = event.getResponse();
     if (response.getHeaders().get('content-type') === 'application/json') {
         var contents = response.getContents();
@@ -30,21 +50,6 @@ var httpResponseListener = function(event) {
     }
 };
 
-var json = function(http) {
-    var dispatcher = http.getDispatcher();
-
-    http.postJson = postJson;
-    http.getJson = getJson;
-
-    dispatcher.addListener('HttpRequest', httpRequestListener);
-    dispatcher.addListener('HttpResponse', httpResponseListener);
-};
-
-json.postJson = postJson;
-json.getJson = getJson;
-json.httpRequestListener = httpRequestListener;
-json.httpResponseListener = httpResponseListener;
-
 function requestToJson(request) {
     var headers = request.getHeaders();
     headers.set('content-type', 'application/json');
@@ -52,4 +57,4 @@ function requestToJson(request) {
     return request;
 }
 
-module.exports = json;
+module.exports = JsonExtension;

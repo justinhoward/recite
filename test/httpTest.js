@@ -124,4 +124,16 @@ describe('Http', function() {
             done();
         });
     });
+
+    it('can register a extension', function() {
+        var passedHttp;
+        var http = new Http(new OkDriver());
+        var extension = {
+            register: function(http) {
+                passedHttp = http;
+            }
+        };
+        http.addExtension(extension);
+        expect(passedHttp).to.equal(http);
+    });
 });
