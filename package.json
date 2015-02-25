@@ -6,6 +6,10 @@
   "scripts": {
     "test": "mocha --recursive"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justinhoward/recite.git"
+  },
   "keywords": [
     "http",
     "ajax",
