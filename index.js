@@ -21,4 +21,10 @@ Http.extensions = {
     JsonExtension: require('./src/extensions/JsonExtension')
 };
 
+Http.utils = {
+    encodeAttributes: require('./src/utilities/encodeAttributes'),
+    isEmptyObject: require('./src/utilities/isEmptyObject'),
+    isPlainObject: require('./src/utilities/isPlainObject')
+};
+
 module.exports = Http;

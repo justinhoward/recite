@@ -28,4 +28,10 @@ describe('index', function() {
     it('has extensions', function() {
         expect(index.extensions.JsonExtension).to.exist();
     });
+
+    it('has utils', function() {
+        expect(index.utils.encodeAttributes).to.exist();
+        expect(index.utils.isEmptyObject).to.exist();
+        expect(index.utils.isPlainObject).to.exist();
+    });
 });
