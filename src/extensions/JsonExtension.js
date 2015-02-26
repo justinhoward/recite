@@ -1,4 +1,5 @@
 'use strict';
+var isPlainObject = require('../utilities/isPlainObject');
 
 function JsonExtension() {
 
@@ -34,7 +35,7 @@ JsonExtension.httpRequestListener = function(event) {
     var request = event.getRequest();
     if (request.getHeaders().get('content-type') === 'application/json') {
         var contents = request.getContents();
-        if ('' + contents === '[object Object]') {
+        if (isPlainObject(contents)) {
             request.setContents(JSON.stringify(contents));
         }
     }
