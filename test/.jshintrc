@@ -14,5 +14,5 @@
     "maxcomplexity": 10,
     "maxlen": 120,
 
-    "predef": ["describe", "it"]
+    "predef": ["describe", "it", "before", "after"]
 }

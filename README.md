@@ -299,7 +299,12 @@ That's it! Now your requests will be sent with AJAX.
 
 ### NodeHttpDriver
 
-Planned
+This driver uses the built-in `http` and `https` modules in node.js.
+
+```javascript
+var driver = new Http.driver.NodeDriver();
+var http = new Http(driver);
+```
 
 ### Custom Drivers
 

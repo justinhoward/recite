@@ -18,6 +18,7 @@ describe('index', function() {
 
     it('has drivers', function() {
         expect(index.driver.XmlHttpRequestDriver).to.exist();
+        expect(index.driver.NodeDriver).to.exist();
     });
 
     it('has events', function() {

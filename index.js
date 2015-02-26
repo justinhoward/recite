@@ -9,7 +9,8 @@ Http.Response = require('./src/messages/Response');
 Http.Headers = require('./src/messages/Headers');
 
 Http.driver = {
-    XmlHttpRequestDriver: require('./src/drivers/XmlHttpRequestDriver')
+    XmlHttpRequestDriver: require('./src/drivers/XmlHttpRequestDriver'),
+    NodeDriver: require('./src/drivers/NodeDriver')
 };
 
 Http.event = {
