@@ -19,6 +19,17 @@ var Http = require('recite');
 
 Recite is also compatible with [browserify](http://browserify.org/) for use in the browser.
 
+### Configuring Promise
+
+Recite requires a promise library. By default it uses global.Promise, but if you're using recite
+in node or older browsers, you'll need to set it manually. To set it, just set `Http.Promise`.
+
+```javascript
+Http.Promise = require('es6-promise').Promise;
+```
+
+Recite is tested against the [es6-promise](https://github.com/jakearchibald/es6-promise) module.
+
 ## Getting Started
 
 First, create a new instance of Http
