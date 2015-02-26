@@ -17,12 +17,21 @@ Then require it with
 var Http = require('recite');
 ```
 
-Recite is also compatible with [browserify](http://browserify.org/) for use in the browser.
+### Browserify
+
+Recite is compatible with [browserify](http://browserify.org/) for use in the browser.
+For sake of size, the `NodeDriver` is not included in the browserify bundle. If you wish to use it,
+you can require it explicitly with:
+
+```javascript
+var NodeDriver = require('recite/src/drivers/NodeDriver');
+```
 
 ### Configuring Promise
 
-Recite requires a promise library. By default it uses global.Promise, but if you're using recite
-in node or older browsers, you'll need to set it manually. To set it, just set `Http.Promise`.
+Recite requires a promise library. By default it uses global.Promise (window.Promise in the browser)
+but if you're using recite in node or older browsers, you'll need to set it manually.
+To set it, just set `Http.Promise`.
 
 ```javascript
 Http.Promise = require('es6-promise').Promise;
