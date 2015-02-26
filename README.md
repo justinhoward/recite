@@ -308,8 +308,8 @@ var http = new Http(driver);
 
 ### Custom Drivers
 
-Recite is implementation agnostic. That means the back-end can use any HTTP library you want. An
-`XmlHttpRequestDriver` is provided, however if you use a different library,
+Recite is implementation agnostic. That means the back-end can use any HTTP library you want.
+`XmlHttpRequestDriver` and `NodeDriver` are provided, however if you use a different library,
 it is easy to hook into Recite. All you have to do is implement the `send(request, callback)` method.
 
 Recite will call your driver's `send` method when the user calls `Http.send`.
@@ -378,7 +378,8 @@ http.postJson('http://example.com/api/person', {name: 'Justin'}) .send().then(fu
 ### Custom Extensions
 
 It's easy to create your own extensions. Extensions only require one method,
-the `register(http)` method.
+the `register(http)` method. We're going to implement an extension that logs unsuccessful
+requests.
 
 ```javascript
 var logExtension = {
