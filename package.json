@@ -5,7 +5,9 @@
   "main": "index.js",
   "browser": "./browser.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "cover": "istanbul cover _mocha -- --recursive",
+    "publish-coverage": "codeclimate < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,9 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^1.10.0",
+    "codeclimate-test-reporter": "0.0.4",
     "es6-promise": "^2.0.1",
+    "istanbul": "^0.3.6",
     "mocha": "^2.0.1"
   },
   "dependencies": {
