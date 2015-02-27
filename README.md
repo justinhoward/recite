@@ -1,7 +1,9 @@
-# Recite
+# Recite [![npm version](https://badge.fury.io/js/recite.svg)](http://badge.fury.io/js/recite)
 ##### An object oriented HTTP library for javascript
 
 [![Build Status](https://travis-ci.org/justinhoward/recite.svg)](https://travis-ci.org/justinhoward/recite)
+[![Code Climate](https://codeclimate.com/github/justinhoward/recite/badges/gpa.svg)](https://codeclimate.com/github/justinhoward/recite)
+[![Test Coverage](https://codeclimate.com/github/justinhoward/recite/badges/coverage.svg)](https://codeclimate.com/github/justinhoward/recite)
 
 ## Installation
 
