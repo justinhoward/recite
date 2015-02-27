@@ -1,6 +1,6 @@
 {
   "name": "recite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An object oriented HTTP library",
   "main": "index.js",
   "browser": "./browser.js",
@@ -15,8 +15,11 @@
   },
   "keywords": [
     "http",
+    "https",
     "ajax",
-    "xmlhttprequest"
+    "xmlhttprequest",
+    "oo",
+    "object-oriented"
   ],
   "author": "Justin Howard <jmhoward0@gmail.com>",
   "license": "MIT",
