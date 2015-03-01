@@ -2,16 +2,16 @@
 var Response = require('../messages/Response');
 var Headers = require('../messages/Headers');
 
-function XmlHTTPRequestDriver(xhrFactory) {
+function XmlHttpRequestDriver(xhrFactory) {
     if (!xhrFactory) {
         xhrFactory = function() {
-            return new global.XMLHTTPRequest();
+            return new global.XMLHttpRequest();
         };
     }
 
     this.xhrFactory = xhrFactory;
 }
-var proto = XmlHTTPRequestDriver.prototype;
+var proto = XmlHttpRequestDriver.prototype;
 
 proto.send = function(request, callback) {
     var self = this;
@@ -60,4 +60,4 @@ proto.getXhrHeaders = function(xhr) {
     return resultHeaders;
 };
 
-module.exports = XmlHTTPRequestDriver;
+module.exports = XmlHttpRequestDriver;
