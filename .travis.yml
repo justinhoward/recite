@@ -4,8 +4,16 @@ node_js:
 addons:
   code_climate:
     repo_token:
-        secure: gPc05jSfF/Yoh+/sggQnVrDLCLhG8vGMeC0z+X5E7JxNCiw+XMv8CFP5Bn+j7tmmchsob1/WU7sktrIWTrbtGsjEVYOXfFAp/osF9b4kLXReBraAy98ELlg2Dwne3Oiimv7Llf8UFXirK5w1q2aivQnyZ6xqzurGcClET2fGhJM=
+      secure: gPc05jSfF/Yoh+/sggQnVrDLCLhG8vGMeC0z+X5E7JxNCiw+XMv8CFP5Bn+j7tmmchsob1/WU7sktrIWTrbtGsjEVYOXfFAp/osF9b4kLXReBraAy98ELlg2Dwne3Oiimv7Llf8UFXirK5w1q2aivQnyZ6xqzurGcClET2fGhJM=
 script:
 - npm run cover
 after_script:
 - npm run publish-coverage
+deploy:
+  provider: npm
+  email: jmhoward0@gmail.com
+  api_key:
+    secure: RTSPeOtYKt4e/nPKP/1eHcP/Ps2oIDTT7xuvXoahWUlumHOgr/U6cmevqYp/3oGRgH5Ds5/xLvGtKVs5ZKyLkUATEor3H4B0cs4bCxXDxJye9T2z4HKLv3ndoiv786NlJ2+endrL1MjR1X/u/Pfm5bD1rLFHq+YlO4rSJ7S6FTs=
+  on:
+    tags: true
+    repo: justinhoward/recite
