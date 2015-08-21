@@ -5,44 +5,44 @@ var Response = require('../../src/messages/Response');
 var Http = require('../../src/Http');
 
 function OkDriver() {
-    this.send = function(request, callback) {
-        callback(new Response(request, 200));
-    };
+  this.send = function(request, callback) {
+    callback(new Response(request, 200));
+  };
 }
 
 describe('messages/Request', function() {
-    it('can be constructed', function() {
-        var request = new Request('GET', '/test', 'contents', {foo: 'val'});
+  it('can be constructed', function() {
+    var request = new Request('GET', '/test', 'contents', {foo: 'val'});
 
-        expect(request.getMethod()).to.equal('GET');
-        expect(request.getUrl()).to.equal('/test');
-        expect(request.getContents()).to.equal('contents');
-        expect(request.getHeaders().get('foo')).to.equal('val');
+    expect(request.getMethod()).to.equal('GET');
+    expect(request.getUrl()).to.equal('/test');
+    expect(request.getContents()).to.equal('contents');
+    expect(request.getHeaders().get('foo')).to.equal('val');
+  });
+
+  it('converts method to upper case', function() {
+    var request = new Request('get', '/test');
+
+    // on construction
+    expect(request.getMethod()).to.equal('GET');
+
+    // and on set
+    expect(request.getMethod()).to.equal('GET');
+  });
+
+  it('throws an error when sending a detached Request', function() {
+    var request = new Request('get', '/test');
+    expect(function() {
+      request.send();
+    }).to.throw();
+  });
+
+  it('can send itself if http is set', function() {
+    var request = new Request('get', '/test');
+    var http = new Http(new OkDriver());
+    request.setHttp(http);
+    return request.send().then(function(response) {
+      expect(response.getRequest()).to.equal(request);
     });
-
-    it('converts method to upper case', function() {
-        var request = new Request('get', '/test');
-
-        // on construction
-        expect(request.getMethod()).to.equal('GET');
-
-        // and on set
-        expect(request.getMethod()).to.equal('GET');
-    });
-
-    it('throws an error when sending a detached Request', function() {
-        var request = new Request('get', '/test');
-        expect(function() {
-            request.send();
-        }).to.throw();
-    });
-
-    it('can send itself if http is set', function() {
-        var request = new Request('get', '/test');
-        var http = new Http(new OkDriver());
-        request.setHttp(http);
-        return request.send().then(function(response) {
-            expect(response.getRequest()).to.equal(request);
-        });
-    });
+  });
 });

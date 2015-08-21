@@ -1,0 +1,12 @@
+{
+  "preset": "airbnb",
+  "requireTrailingComma": null,
+  "disallowTrailingComma": true,
+  "safeContextKeyword": [
+    "self"
+  ],
+
+  "excludeFiles": [
+    "coverage/**"
+  ]
+}
