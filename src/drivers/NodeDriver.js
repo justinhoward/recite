@@ -4,6 +4,13 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 
+/**
+ * Driver for the node `http` and `https` modules
+ *
+ * Use this driver when in a node environment.
+ *
+ * @class Http.driver.NodeDriver
+ */
 function NodeDriver() {}
 
 var proto = NodeDriver.prototype;
@@ -16,8 +23,7 @@ proto.send = function(request, callback) {
   this.request(library, request, options, callback);
 };
 
-proto.getRequestOptions = function(request, urlParts)
-{
+proto.getRequestOptions = function(request, urlParts) {
   var options = {
     hostname: urlParts.hostname,
     path: urlParts.path,
@@ -41,8 +47,7 @@ proto.createResponse = function(request, nodeResponse, contents) {
   );
 };
 
-proto.request = function(library, request, options, callback)
-{
+proto.request = function(library, request, options, callback) {
   var self = this;
   var nodeRequest = library.request(options, function(nodeResponse) {
     var contents = '';
@@ -68,8 +73,7 @@ proto.request = function(library, request, options, callback)
   nodeRequest.end();
 };
 
-proto.handleError = function(request, error, callback)
-{
+proto.handleError = function(request, error, callback) {
   if (error.code === 'ENOTFOUND') {
     callback(new Response(request, 404));
   } else {

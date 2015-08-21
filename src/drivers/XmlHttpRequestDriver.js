@@ -2,6 +2,19 @@
 var Response = require('../messages/Response');
 var Headers = require('../messages/Headers');
 
+/**
+ * Driver for the browser `XMLHttpRequest` API
+ *
+ * Use this driver when in a browser environment.
+ *
+ * By default, this driver uses the global `XMLHttpRequest` function
+ * to send requests. To override this, use the `xhrFactory` parameter
+ * to construct your own XMLHttpRequest. The callback should return
+ * a new instance each time it is called.
+ *
+ * @class Http.driver.XmlHttpRequestDriver
+ * @param {Function} [xhrFactory] A function that returns a new `XMLHttpRequest` instance
+ */
 function XmlHttpRequestDriver(xhrFactory) {
   if (!xhrFactory) {
     xhrFactory = function() {

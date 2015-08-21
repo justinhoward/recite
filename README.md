@@ -354,9 +354,8 @@ var http = new Http(driver);
 We could also use a constructor function and a prototype to do the same thing.
 
 ```javascript
-function OkDriver() {
+function OkDriver() {}
 
-}
 OkDriver.prototype.send = function(request, callback) {
     var response = new Response(request, 200);
     callback(response);
@@ -392,7 +391,7 @@ set the 'content-type' and 'accepts' headers of your request to 'application/jso
 `postJson` method to send the above request.
 
 ```javascript
-http.postJson('http://example.com/api/person', {name: 'Justin'}) .send().then(function(response) {
+http.postJson('http://example.com/api/person', {name: 'Justin'}).send().then(function(response) {
     console.log('Id is ' + response.getContents().id);
 });
 ```
@@ -419,9 +418,8 @@ http.addExtension(logExtension);
 We can also use a constructor function and prototype to do the same thing.
 
 ```javascript
-function LogExtension() {
+function LogExtension() {}
 
-}
 LogExtension.prototype.register = function(http) {
     http.getDispatcher().addListener('http.response', function(event) {
         if (!event.isSuccessful()) {
@@ -432,4 +430,3 @@ LogExtension.prototype.register = function(http) {
 http.addExtension(new LogExtension());
 ```
 Check out the built-in `JsonExtension` for a more complete example.
-

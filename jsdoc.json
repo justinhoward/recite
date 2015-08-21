@@ -1,0 +1,17 @@
+{
+  "source": {
+    "include": ["src", "index.js", "browser.js"]
+  },
+
+  "opts": {
+    "recurse": true,
+    "readme": "README.md",
+    "destination": "docs"
+  },
+
+  "plugins": ["plugins/markdown"],
+
+  "templates": {
+    "cleverLinks": true
+  }
+}

@@ -2,11 +2,20 @@
   "preset": "airbnb",
   "requireTrailingComma": null,
   "disallowTrailingComma": true,
+  "disallowNewlineBeforeBlockStatements": true,
   "safeContextKeyword": [
     "self"
   ],
 
   "excludeFiles": [
-    "coverage/**"
-  ]
+    "coverage/**",
+    "docs/**"
+  ],
+
+  "jsDoc": {
+    "checkAnnotations": "jsdoc3",
+    "requireParamTypes": true,
+    "checkTypes": "strictNativeCase",
+    "leadingUnderscoreAccess": true
+  }
 }
