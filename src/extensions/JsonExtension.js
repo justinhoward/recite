@@ -1,8 +1,7 @@
 'use strict';
 var isPlainObject = require('../utilities/isPlainObject');
 
-function JsonExtension() {
-}
+function JsonExtension() {}
 
 var proto = JsonExtension.prototype;
 

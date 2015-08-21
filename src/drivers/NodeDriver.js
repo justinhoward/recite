@@ -38,7 +38,7 @@ proto.createResponse = function(request, nodeResponse, contents) {
     nodeResponse.statusCode,
     contents,
     nodeResponse.headers
-    );
+  );
 };
 
 proto.request = function(library, request, options, callback)

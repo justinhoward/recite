@@ -38,7 +38,7 @@ proto.send = function() {
   if (!this._http) {
     throw new Error(
       'Cannot send a detached request. Use Request.setHttp, Http.request, or Http.send.'
-      );
+    );
   }
 
   return this._http.send(this);
