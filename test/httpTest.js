@@ -7,7 +7,7 @@ var HttpRequestEvent = require('../src/events/HttpRequestEvent');
 var HttpResponseEvent = require('../src/events/HttpResponseEvent');
 var Hoopla = require('hoopla');
 var Http = require('../src/Http');
-Http.Promise = require('es6-promise').Promise;
+Http.Promise = global.Promise || require('es6-promise').Promise;
 
 function OkDriver() {
   this.send = function(request, callback) {

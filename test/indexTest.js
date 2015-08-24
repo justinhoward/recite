@@ -2,7 +2,7 @@
 var expect = require('chai').expect;
 var index = require('../index');
 var Http = require('../src/Http');
-Http.Promise = require('es6-promise').Promise;
+Http.Promise = global.Promise || require('es6-promise').Promise;
 
 describe('index', function() {
   it('has Http', function() {
