@@ -9,7 +9,7 @@ var url = require('url');
  *
  * Use this driver when in a node environment.
  *
- * @class Http.driver.NodeDriver
+ * @class Http.drivers.NodeDriver
  */
 function NodeDriver() {}
 

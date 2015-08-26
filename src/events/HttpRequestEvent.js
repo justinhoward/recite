@@ -10,7 +10,7 @@ var Request = require('../messages/Request');
  * the attributes of the request, or use `setRequest` to
  * replace the request being sent.
  *
- * @class Http.event.HttpRequestEvent
+ * @class Http.events.HttpRequestEvent
  * @param {Http.Request} request The request being sent
  * @param {Object} [attributes] Extra event attributes
  */
@@ -26,7 +26,7 @@ var proto = HttpRequestEvent.prototype;
  * Get the request being sent
  *
  * @method getRequest
- * @memberof Http.event.HttpRequestEvent.prototype
+ * @memberof Http.events.HttpRequestEvent.prototype
  * @return {Http.Request} The request
  */
 proto.getRequest = function() {
@@ -37,9 +37,9 @@ proto.getRequest = function() {
  * Set the request object to be sent
  *
  * @method setRequest
- * @memberof Http.event.HttpRequestEvent.prototype
+ * @memberof Http.events.HttpRequestEvent.prototype
  * @param {Http.Request} request The request to send
- * @return {Http.event.HttpRequestEvent} `this`
+ * @return {Http.events.HttpRequestEvent} `this`
  */
 proto.setRequest = function(request) {
   if (!(request instanceof Request)) {

@@ -2,7 +2,6 @@
 
 ## Upcoming
 - Browserify UMD package and automatic GitHub release
-- Pluralize event and driver namespaces
 - Merge code for HttpRequestEvent and HttpResponseEvent
 
 ## Proposed

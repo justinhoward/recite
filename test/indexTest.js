@@ -17,13 +17,13 @@ describe('index', function() {
   });
 
   it('has drivers', function() {
-    expect(index.driver.XmlHttpRequestDriver).to.exist();
-    expect(index.driver.NodeDriver).to.exist();
+    expect(index.drivers.XmlHttpRequestDriver).to.exist();
+    expect(index.drivers.NodeDriver).to.exist();
   });
 
   it('has events', function() {
-    expect(index.event.HttpRequestEvent).to.exist();
-    expect(index.event.HttpResponseEvent).to.exist();
+    expect(index.events.HttpRequestEvent).to.exist();
+    expect(index.events.HttpResponseEvent).to.exist();
   });
 
   it('has extensions', function() {

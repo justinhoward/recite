@@ -12,7 +12,7 @@ var Headers = require('../messages/Headers');
  * to construct your own XMLHttpRequest. The callback should return
  * a new instance each time it is called.
  *
- * @class Http.driver.XmlHttpRequestDriver
+ * @class Http.drivers.XmlHttpRequestDriver
  * @param {Function} [xhrFactory] A function that returns a new `XMLHttpRequest` instance
  */
 function XmlHttpRequestDriver(xhrFactory) {

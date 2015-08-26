@@ -14,7 +14,7 @@ Http.Headers = require('./src/messages/Headers');
  * @type {Object}
  * @namespace Http.driver
  */
-Http.driver = {
+Http.drivers = {
   XmlHttpRequestDriver: require('./src/drivers/XmlHttpRequestDriver')
 };
 
@@ -24,7 +24,7 @@ Http.driver = {
  * @type {Object}
  * @namespace Http.event
  */
-Http.event = {
+Http.events = {
   HttpRequestEvent: require('./src/events/HttpRequestEvent'),
   HttpResponseEvent: require('./src/events/HttpResponseEvent')
 };

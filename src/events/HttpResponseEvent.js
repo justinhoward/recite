@@ -10,7 +10,7 @@ var Response = require('../messages/Response');
  * the attributes of the response, or use `setResponse` to
  * replace the response being returned.
  *
- * @class Http.event.HttpResponseEvent
+ * @class Http.events.HttpResponseEvent
  * @param {Http.Response} response The response being returned
  * @param {Object} [attributes] Extra event attributes
  */
@@ -26,7 +26,7 @@ var proto = HttpResponseEvent.prototype;
  * Get the response being returned
  *
  * @method getResponse
- * @memberof Http.event.HttpResponseEvent.prototype
+ * @memberof Http.events.HttpResponseEvent.prototype
  * @return {Http.Response} The response
  */
 proto.getResponse = function() {
@@ -37,9 +37,9 @@ proto.getResponse = function() {
  * Set the response to return
  *
  * @method setResponse
- * @memberof Http.event.HttpResponseEvent.prototype
+ * @memberof Http.events.HttpResponseEvent.prototype
  * @param {Http.Response} response The response
- * @return {Http.event.HttpResponseEvent} `this`
+ * @return {Http.events.HttpResponseEvent} `this`
  */
 proto.setResponse = function(response) {
   if (!(response instanceof Response)) {

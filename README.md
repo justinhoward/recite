@@ -46,7 +46,7 @@ In node < 0.12, Recite is tested against the [es6-promise](https://github.com/ja
 First, create a new instance of Http
 
 ```javascript
-var driver = new Http.driver.XmlHttpRequestDriver();
+var driver = new Http.drivers.XmlHttpRequestDriver();
 var http = new Http(driver);
 ```
 
@@ -311,10 +311,10 @@ var http = new Http(driver, dispatcher);
 ### XmlHttpRequestDriver
 
 This driver is for use in browsers and sends requests with AJAX. To use it simply create
-an instance of `Http.driver.XmlHttpRequestDriver`.
+an instance of `Http.drivers.XmlHttpRequestDriver`.
 
 ```javascript
-var driver = new Http.driver.XmlHttpRequestDriver();
+var driver = new Http.drivers.XmlHttpRequestDriver();
 var http = new Http(driver);
 ```
 
@@ -325,7 +325,7 @@ That's it! Now your requests will be sent with AJAX.
 This driver uses the built-in `http` and `https` modules in node.js.
 
 ```javascript
-var driver = new Http.driver.NodeDriver();
+var driver = new Http.drivers.NodeDriver();
 var http = new Http(driver);
 ```
 
