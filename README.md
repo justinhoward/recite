@@ -387,7 +387,7 @@ http.post('http://example.com/api/person', {name: 'Justin'}, {
 });
 ```
 
-That's a bit wordy, so the extension also adds the `getJson` and `postJson` methods for you. These
+That's a bit wordy, so the extension also adds the `getJson`, `postJson`, and `requestJson` methods for you. These
 set the 'content-type' and 'accepts' headers of your request to 'application/json'. Let's use the
 `postJson` method to send the above request.
 

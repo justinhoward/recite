@@ -43,7 +43,7 @@ describe('extensions/JsonExtension', function() {
     var http = new Http(new OkDriver());
     http.addExtension(new JsonExtension());
 
-    var request = http.getJson('/test/');
+    var request = http.getJson('/test');
     expect(request.getMethod()).to.equal('GET');
     expect(request.getHeaders().get('content-type')).to.equal('application/json');
     expect(request.getHeaders().get('accept')).to.equal('application/json');
@@ -53,8 +53,18 @@ describe('extensions/JsonExtension', function() {
     var http = new Http(new OkDriver());
     http.addExtension(new JsonExtension());
 
-    var request = http.postJson('/test/');
+    var request = http.postJson('/test');
     expect(request.getMethod()).to.equal('POST');
+    expect(request.getHeaders().get('content-type')).to.equal('application/json');
+    expect(request.getHeaders().get('accept')).to.equal('application/json');
+  });
+
+  it('can create a json request with a given method', function() {
+    var http = new Http(new OkDriver());
+    http.addExtension(new JsonExtension());
+
+    var request = http.requestJson('PUT', '/test');
+    expect(request.getMethod()).to.equal('PUT');
     expect(request.getHeaders().get('content-type')).to.equal('application/json');
     expect(request.getHeaders().get('accept')).to.equal('application/json');
   });

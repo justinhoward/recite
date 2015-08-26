@@ -31,6 +31,10 @@ proto.register = function(http) {
   if (!http.postJson) {
     http.postJson = JsonExtension.postJson;
   }
+
+  if (!http.requestJson) {
+    http.requestJson = JsonExtension.requestJson;
+  }
 };
 
 /**
@@ -46,19 +50,13 @@ proto.addListeners = function(dispatcher) {
 };
 
 /**
- * Creates an HTTP GET request with a JSON body
- *
- * This method is added to the `Http` instance when the extension is registered.
- * Call it with
- *
- * ```
- * http.getJson('http://example.com');
- * ```
+ * Creates an HTTP GET request with JSON headers
  *
  * Sets the `Content-type` header to `application/json`
  *
  * @method getJson
  * @memberof Http.extensions.JsonExtension
+ * @see {@link Http.extensions.JsonExtension#requestJson}
  * @param {string} url The request URL
  * @param {Object} attributes Get parameters as an object of keys/values
  * @param {Headers|Object} headers Additional request headers
@@ -70,19 +68,14 @@ JsonExtension.getJson = function(url, attributes, headers) {
 };
 
 /**
- * Creates an HTTP POST request with a JSON body
- *
- * This method is added to the `Http` instance when the extension is registered.
- * Call it with
- *
- * ```
- * http.postJson('http://example.com', {foo: 123});
- * ```
+ * Creates an HTTP POST request with JSON headers
  *
  * Sets the `Content-type` header to `application/json`
+ * If `contents` is given, it will be JSON stringified.
  *
  * @method postJson
  * @memberof Http.extensions.JsonExtension
+ * @see {@link Http.extensions.JsonExtension#requestJson}
  * @param {string} url The request URL
  * @param {*} contents The body contents
  * @param {Headers|Object} headers Additional request headers
@@ -90,6 +83,30 @@ JsonExtension.getJson = function(url, attributes, headers) {
  */
 JsonExtension.postJson = function(url, contents, headers) {
   var request = this.post(url, contents, headers);
+  return requestToJson(request);
+};
+
+/**
+ * Creates an HTTP request with JSON headers
+ *
+ * Sets the `Content-type` header to `application/json`
+ * If `contents` is given, it will be JSON stringified.
+ *
+ * This method is added to the `Http` instance when the extension is registered.
+ * Call it with
+ *
+ * ```
+ * http.requestJson('PUT', 'http://example.com', {foo: 123});
+ * ```
+ *
+ * @param {string} method The HTTP method
+ * @param {string} url The request url
+ * @param {*} contents The request body contents
+ * @param {Headers|Object} [headers] Additional request headers
+ * @return {Http.Request} The request object
+ */
+JsonExtension.requestJson = function(method, url, contents, headers) {
+  var request = this.request(method, url, contents, headers);
   return requestToJson(request);
 };
 
