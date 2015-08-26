@@ -4,6 +4,7 @@ node_js:
 - '0.11'
 - '0.12'
 - 'iojs'
+sudo: false
 addons:
   code_climate:
     repo_token:
@@ -12,11 +13,22 @@ script:
 - npm run cover
 after_script:
 - npm run publish-coverage
+before_deploy:
+- npm run release
 deploy:
-  provider: npm
-  email: jmhoward0@gmail.com
-  api_key:
-    secure: RTSPeOtYKt4e/nPKP/1eHcP/Ps2oIDTT7xuvXoahWUlumHOgr/U6cmevqYp/3oGRgH5Ds5/xLvGtKVs5ZKyLkUATEor3H4B0cs4bCxXDxJye9T2z4HKLv3ndoiv786NlJ2+endrL1MjR1X/u/Pfm5bD1rLFHq+YlO4rSJ7S6FTs=
-  on:
-    tags: true
-    repo: justinhoward/recite
+  - provider: releases
+    api_key:
+      secure: jtSjLNftRC+w6F/iiA5LMoA0+lTU0kk8YDz6jdylG1rwfuF8I2Tc/PHkwJ8f91YLB7WqU5UNnUMWbMKUeztkz/8qeadML4xxoL9l0lpDulRp7/+6FXmHgmlFCgarxjJyiDSUOCxzMBv+05CGDjCef1GlR5AIyJ6zYx7ZK1ugF9c=
+    skip_cleanup: true
+    file_glob: true
+    file: release/recite-*
+    on:
+      repo: justinhoward/recite
+      tags: true
+  - provider: npm
+    email: jmhoward0@gmail.com
+    api_key:
+      secure: RTSPeOtYKt4e/nPKP/1eHcP/Ps2oIDTT7xuvXoahWUlumHOgr/U6cmevqYp/3oGRgH5Ds5/xLvGtKVs5ZKyLkUATEor3H4B0cs4bCxXDxJye9T2z4HKLv3ndoiv786NlJ2+endrL1MjR1X/u/Pfm5bD1rLFHq+YlO4rSJ7S6FTs=
+    on:
+      repo: justinhoward/recite
+      tags: true

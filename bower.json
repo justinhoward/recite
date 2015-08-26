@@ -1,0 +1,24 @@
+{
+  "name": "recite",
+  "main": "index.js",
+  "version": "0.2.0",
+  "homepage": "https://github.com/justinhoward/recite",
+  "authors": [
+    "Justin Howard <jmhoward0@gmail.com>"
+  ],
+  "description": "An object oriented HTTP library",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "http",
+    "https",
+    "ajax",
+    "xmlhttprequest",
+    "oo",
+    "object-oriented"
+  ],
+  "license": "MIT"
+}

@@ -1,13 +1,14 @@
 {
   "name": "recite",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "An object oriented HTTP library",
   "main": "index.js",
   "browser": "./browser.js",
   "scripts": {
     "test": "mocha --recursive",
     "cover": "istanbul cover _mocha -- --recursive",
-    "publish-coverage": "codeclimate < coverage/lcov.info"
+    "publish-coverage": "codeclimate < coverage/lcov.info",
+    "release": "gulp release"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,23 @@
   "author": "Justin Howard <jmhoward0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "browserify": "^11.0.1",
     "chai": "^1.10.0",
     "codeclimate-test-reporter": "0.0.4",
     "es6-promise": "^2.0.1",
+    "gulp": "^3.9.0",
+    "gulp-bump": "^0.3.1",
+    "gulp-gzip": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-streamify": "^1.0.0",
+    "gulp-tar": "^1.4.0",
+    "gulp-uglify": "^1.3.0",
+    "gulp-zip": "^3.0.2",
     "istanbul": "^0.3.6",
-    "mocha": "^2.0.1"
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0",
+    "mocha": "^2.0.1",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "hoopla": "^0.1.1",
