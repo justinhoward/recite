@@ -13,7 +13,7 @@ describe('messages/Headers', function() {
     expect(headers.get('bar')).to.equal('bar value');
   });
 
-  it('has case insensitive keys', function() {
+  it('keys can be searched case-insensitively', function() {
     var headers = new Headers();
 
     // when setting
@@ -25,15 +25,35 @@ describe('messages/Headers', function() {
     expect(headers.get('BAR')).to.equal('Bar Value');
   });
 
-  it('can get all keys', function() {
+  it('uses latest case of header', function() {
+    var headers = new Headers();
+
+    headers.set('Foo', 'Foo Value');
+    headers.set('foo', 'Bar Value');
+
+    expect(headers.all()).to.deep.equal({foo: 'Bar Value'});
+  });
+
+  it('can get all keys and maintain case', function() {
     var headers = new Headers({
       Foo: 'foo val',
       bar: 'bar val'
     });
 
     var all = headers.all();
-    expect(all.foo).to.equal('foo val');
+    expect(all.Foo).to.equal('foo val');
     expect(all.bar).to.equal('bar val');
+  });
+
+  it('can remove a key', function() {
+    var headers = new Headers({
+      foo: 'foo value',
+      bar: 'bar value'
+    });
+
+    headers.remove('foo');
+
+    expect(headers.all()).to.deep.equal({bar: 'bar value'});
   });
 
   it('can clear keys', function() {
@@ -50,6 +70,6 @@ describe('messages/Headers', function() {
       Bar: 'bar val'
     });
 
-    expect(headers.all()).to.deep.equal({foo: 'foo val', bar: 'bar val'});
+    expect(headers.all()).to.deep.equal({foo: 'foo val', Bar: 'bar val'});
   });
 });

@@ -9,6 +9,7 @@
  */
 function Headers(headers) {
   this._headers = {};
+  this._index = {};
   this.setObject(headers);
 }
 
@@ -26,19 +27,43 @@ var proto = Headers.prototype;
  * @return {string|undefined} The header contents if set, otherwise `undefined`
  */
 proto.get = function(name) {
-  return this._headers[name.toLowerCase()];
+  return this._headers[this._index[name.toLowerCase()]];
 };
 
 /**
  * Sets a header value
  *
+ * Setting a header that already exists will overwrite the
+ * existing value. This is true even if the header is
+ * in a different case (Content-Type vs. content-type).
+ *
  * @memberof Http.Headers.prototype
  * @method set
  * @param {string} name The header name
  * @param {string} contents The header value
+ * @return {Http.Headers} `this`
  */
 proto.set = function(name, contents) {
-  this._headers[name.toLowerCase()] = contents;
+  this.remove(name);
+  this._index[name.toLowerCase()] = name;
+  this._headers[name] = contents;
+  return this;
+};
+
+/**
+ * Removes a header
+ *
+ * The name is case insensitive, so removing 'Content-Type'
+ * will also remove 'content-type'
+ *
+ * @param {string} name The header name to remove
+ * @return {Http.Headers} `this`
+ */
+proto.remove = function(name) {
+  name = name.toLowerCase();
+  delete this._headers[this._index[name]];
+  delete this._index[name];
+  return this;
 };
 
 /**
@@ -46,7 +71,7 @@ proto.set = function(name, contents) {
  *
  * The return value is an object of key/value pairs
  * corresponding to header names/values. The keys are
- * always in lower case.
+ * in the same case they were given.
  *
  * @method all
  * @memberof Http.Headers.prototype
@@ -61,23 +86,26 @@ proto.all = function() {
  *
  * @method clear
  * @memberof Http.Headers.prototype
+ * @return {Http.Headers} `this`
  */
 proto.clear = function() {
   this._headers = {};
+  return this;
 };
 
 /**
  * Sets headers with a plain object.
  *
  * The object key/value pairs should correspond
- * to header names/values. They keys will be lower
- * cased. The given headers will be merged into
+ * to header names/values. They keys case will be maintained.
+ * The given headers will be merged into
  * any existing headers. Conflicting keys
  * will be overwritten.
  *
  * @method setObject
  * @memberof Http.Headers.prototype
  * @param {Object} headers An object of the header names/values
+ * @return {Http.Headers} `this`
  */
 proto.setObject = function(headers) {
   for (var key in headers) {
@@ -85,6 +113,8 @@ proto.setObject = function(headers) {
       this.set(key, headers[key]);
     }
   }
+
+  return this;
 };
 
 module.exports = Headers;

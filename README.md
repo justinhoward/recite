@@ -237,14 +237,15 @@ var headers = request.getHeaders();
  - `clear()`: Empties the headers.
  - `setObject(object)`: Adds all the given name/value pairs in `object`. Does not clear existing headers.
 
-Headers are always converted to lower case when stored, so you don't have to worry about what case
-you use when using the `get`/`set` methods. The object returned from `all()` will have its keys in lower case.
+Header case is always maintained when stored, but the `get` method searches case-insensitively.
+This means you don't have to worry about case when using the `get` method, but the object returned
+from `all()` will have its keys in the case you specified.
 
 A `Headers` instance can also be created manually with the constructor and passed in anywhere that accepts a headers argument. The constructor takes a single argument, a plain object of header name/value pairs.
 
 ```javascript
 var headers = new Headers({
-    'content-type': 'application/json'
+    'Content-type': 'application/json'
 });
 var request = http.get('http://example.com/api/person', {id: 123}, headers);
 ```
