@@ -58,12 +58,13 @@ var request = http.get('/api/post/3');
 So far, we've just created a request object. It hasn't been sent yet. Now we'll send it.
 
 ```javascript
-request.send().then(function(response) {
+request.send(function(response) {
     console.log(response.getContents());
 });
 ```
 
-We called the `send()` method on the request object. This submits the request to our driver (we'll learn about those later) and returns a promise. Promises have a `then` method that gets called when our response comes back from the driver. The promise is resolved with a response object. Here we're simply logging the contents of that response to the console.
+We called the `send()` method on the request object. This submits the request to our driver (we'll learn about those later). When the response comes back, our callback function will be called
+with a response object. Here we're simply logging the contents of that response to the console.
 
 ## Creating Requests
 
@@ -117,13 +118,39 @@ The Http `send()` method does this step.
 
 ```javascript
 var request = http.get('http://www.example.com');
-http.send(request).then(function(response) {
-    // handle response here
+http.send(request, function(response) {
+    // handle successful response here
+}, function(response) {
+    // handle failure here
 });
 ```
 
-The `send()` method returns a `Promise` object. The promise is resolved with a
-`Response` object (see below).
+The `send()` method accepts two callbacks, the first is called if our request is
+successful. The second is called if the request fails. Both the callbacks are passed
+a `Response` object (see below).
+
+### Promises
+
+Although you can pass callbacks to the `send()` method as illustrated above,
+you can also use promises to handle responses. Let's redo our example from
+above, but using a promise instead.
+
+```javascript
+var request = http.get('http://www.example.com');
+http.send(request).then(function(response) {
+    // handle successful response here
+}, function(response) {
+    // handle failure here
+});
+```
+
+We called the `send()` method on the request object. This returns a promise.'
+Promises have a `then` method that gets called when our response comes back from
+the driver. The promise is resolved (or rejected) with a Response object.
+
+If you're not familiar with promises, you may not see the benefit of using
+them from this example. Just use whichever technique you prefer. The examples
+below will use promises rather than passing callbacks.
 
 ### With Request
 
@@ -135,6 +162,9 @@ http.get('http://www.example.com').send().then(function(response) {
     // handle response here
 });
 ```
+
+As with `Http.send()`, `Request.send()` can also take resolve and reject
+callbacks.
 
 ### Unsuccessful Requests
 

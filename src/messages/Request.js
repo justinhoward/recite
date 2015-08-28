@@ -120,16 +120,18 @@ proto.setHttp = function(http) {
  * @memberof Http.Request.prototype
  * @see {@link Http#send}
  * @see {@link Http.Request}
+ * @param {function(response)} onResolve A callback to be run on success
+ * @param {function(response)} onReject A callback to be run on failure
  * @return {Promise<Response, Response>} A promise that resolves to a Response object
  */
-proto.send = function() {
+proto.send = function(onResolve, onReject) {
   if (!this._http) {
     throw new Error(
       'Cannot send a detached request. Use Request.setHttp, Http.request, or Http.send.'
     );
   }
 
-  return this._http.send(this);
+  return this._http.send(this, onResolve, onReject);
 };
 
 module.exports = Request;

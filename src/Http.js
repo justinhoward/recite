@@ -94,12 +94,14 @@ proto.post = function(url, contents, headers) {
  * @method send
  * @memberof Http.prototype
  * @param {Request} request The request to send
+ * @param {function(response)} onResolve A callback to be run on success
+ * @param {function(response)} onReject A callback to be run on failure
  * @return {Promise<Response, Response>} A Promise resolved or rejected with a Response object
  */
-proto.send = function(request) {
+proto.send = function(request, onResolve, onReject) {
   var self = this;
   request = dispatchRequest(self, request);
-  return new Http.Promise(function(resolve, reject) {
+  var promise = new Http.Promise(function(resolve, reject) {
     self._driver.send(request, function(response) {
       if (!(response instanceof Response)) {
         throw new Error('send callback must be called with a Response instance');
@@ -113,6 +115,9 @@ proto.send = function(request) {
       }
     });
   });
+
+  promise.then(onResolve, onReject);
+  return promise;
 };
 
 /**

@@ -10,6 +10,12 @@ function OkDriver() {
   };
 }
 
+function NotFoundDriver() {
+  this.send = function(request, callback) {
+    callback(new Response(request, 404));
+  };
+}
+
 describe('messages/Request', function() {
   it('can be constructed', function() {
     var request = new Request('GET', '/test', 'contents', {foo: 'val'});
@@ -43,6 +49,26 @@ describe('messages/Request', function() {
     request.setHttp(http);
     return request.send().then(function(response) {
       expect(response.getRequest()).to.equal(request);
+    });
+  });
+
+  it('calls the onResolve callback', function(done) {
+    var request = new Request('get', '/test');
+    var http = new Http(new OkDriver());
+    request.setHttp(http);
+    return request.send(function(response) {
+      expect(response.getStatus()).to.equal(200);
+      done();
+    });
+  });
+
+  it('calls the onReject callback', function(done) {
+    var request = new Request('get', '/test');
+    var http = new Http(new NotFoundDriver());
+    request.setHttp(http);
+    return request.send(null, function(response) {
+      expect(response.getStatus()).to.equal(404);
+      done();
     });
   });
 });

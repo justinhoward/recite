@@ -136,4 +136,33 @@ describe('Http', function() {
     http.addExtension(extension);
     expect(passedHttp).to.equal(http);
   });
+
+  it('uses the default driver', function() {
+    Http.getDefaultDriver = function() {
+      return new OkDriver();
+    };
+
+    var http = new Http();
+    return http.get('/test').send().then(function(response) {
+      expect(response.getStatus()).to.equal(200);
+    });
+  });
+
+  it('calls resolve callback', function(done) {
+    var http = new Http(new OkDriver());
+    var request = new Request('GET', '/test');
+    return http.send(request, function(response) {
+      expect(response.getStatus()).to.equal(200);
+      done();
+    });
+  });
+
+  it('calls reject callback', function(done) {
+    var http = new Http(new NotFoundDriver());
+    var request = new Request('GET', '/test');
+    return http.send(request, null, function(response) {
+      expect(response.getStatus()).to.equal(404);
+      done();
+    });
+  });
 });
