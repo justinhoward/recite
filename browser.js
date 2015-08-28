@@ -51,4 +51,8 @@ Http.utils = {
   isPlainObject: require('./src/utilities/isPlainObject')
 };
 
+Http.getDefaultDriver = function() {
+  return new Http.drivers.XmlHttpRequestDriver();
+};
+
 module.exports = Http;

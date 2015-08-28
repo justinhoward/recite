@@ -1,38 +1,27 @@
 'use strict';
 var expect = require('chai').expect;
-var index = require('../index');
+var fs = require('fs');
+var shared = require('./sharedIndex');
 var Http = require('../src/Http');
 Http.Promise = global.Promise || require('es6-promise').Promise;
 
 describe('index', function() {
-  it('has Http', function() {
-    expect(index).to.equal(Http);
+  beforeEach(function() {
+    this.index = require('../index');
   });
 
-  it('has messages', function() {
-    expect(index.Message).to.exist();
-    expect(index.Request).to.exist();
-    expect(index.Response).to.exist();
-    expect(index.Headers).to.exist();
+  afterEach(function() {
+    // force requiring index again to reset the default driver
+    delete require.cache[fs.realpath(__dirname + '/../index.js')];
   });
 
-  it('has drivers', function() {
-    expect(index.drivers.XmlHttpRequestDriver).to.exist();
-    expect(index.drivers.NodeDriver).to.exist();
+  it('has the node driver', function() {
+    expect(this.index.drivers.NodeDriver).to.exist();
   });
 
-  it('has events', function() {
-    expect(index.events.HttpRequestEvent).to.exist();
-    expect(index.events.HttpResponseEvent).to.exist();
+  it('has a default driver of NodeDriver', function() {
+    expect(this.index.getDefaultDriver()).to.be.instanceOf(this.index.drivers.NodeDriver);
   });
 
-  it('has extensions', function() {
-    expect(index.extensions.JsonExtension).to.exist();
-  });
-
-  it('has utils', function() {
-    expect(index.utils.encodeAttributes).to.exist();
-    expect(index.utils.isEmptyObject).to.exist();
-    expect(index.utils.isPlainObject).to.exist();
-  });
+  shared.shouldBehaveLikeIndex();
 });

@@ -46,12 +46,9 @@ In node < 0.12, Recite is tested against the [es6-promise](https://github.com/ja
 First, create a new instance of Http
 
 ```javascript
-var driver = new Http.drivers.XmlHttpRequestDriver();
-var http = new Http(driver);
+var http = new Http();
 ```
 
-Here we're creating a new `XmlHttpRequestDriver`. This driver is intended for use in web browsers.
-We'll learn how to use other drivers later.
 Now we're going to use our `Http` instance to create a `GET` request.
 
 ```javascript
@@ -66,7 +63,7 @@ request.send().then(function(response) {
 });
 ```
 
-We called the `send()` method on the request object. This submits the request to our driver and returns a promise. Promises have a `then` method that gets called when our response comes back from the driver. The promise is resolved with a response object. Here we're simply logging the contents of that response to the console.
+We called the `send()` method on the request object. This submits the request to our driver (we'll learn about those later) and returns a promise. Promises have a `then` method that gets called when our response comes back from the driver. The promise is resolved with a response object. Here we're simply logging the contents of that response to the console.
 
 ## Creating Requests
 
@@ -186,7 +183,7 @@ object manually. If you manually instantiate a request, its usually easier to us
 instead of the `Request.send` method.
 
 ```javascript
-var http = new Http(driver);
+var http = new Http();
 var request = new Http.Request('GET', 'http://example.com', contents, headers);
 
 // You can either set the http instance
@@ -303,10 +300,26 @@ By default, `Http` constructs a dispatcher object for you. However, if you are u
 
 ```javascript
 var dispatcher = new Hoopla();
-var http = new Http(driver, dispatcher);
+
+// The first argument is the driver. Read about those below
+var http = new Http(null, dispatcher);
 ```
 
 ## Drivers
+
+Drivers are the back-end of Recite. They do the actual communication over HTTP.
+Recite can use different drivers depending on your environment or preference.
+
+Drivers can be set by passing them as the first argument when constructing your
+Http instance.
+
+### The default driver
+
+You may have noticed that we didn't pass any drivers to the Http constructor in
+some of the examples above. That is because Recite tries to automatically
+choose the best driver for your environment. In the browser, that is the
+XmlHttpRequestDriver. In node, it's the NodeDriver. If that is right for
+your use-case, you never need to construct a driver manually.
 
 ### XmlHttpRequestDriver
 

@@ -20,7 +20,7 @@ function Http(driver, dispatcher) {
     dispatcher = new Hoopla();
   }
 
-  this._driver = driver;
+  this._driver = driver || Http.getDefaultDriver();
   this._dispatcher = dispatcher;
 }
 
@@ -140,6 +140,17 @@ proto.addExtension = function(extension) {
   extension.register(this);
   return this;
 };
+
+/**
+ * Gets a new instance of the default drivers
+ *
+ * This is NodeDriver in a node environment, and XmlHttpRequestDriver
+ * in a browser environment. This can be overridden to return
+ * the driver of your choice.
+ *
+ * @return {driver} A new default driver instance
+ */
+Http.getDefaultDriver = function() {};
 
 function dispatchRequest(self, request) {
   var event = new HttpRequestEvent(request);

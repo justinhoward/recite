@@ -2,5 +2,4 @@
 
 ## Proposed
 - Allow callbacks to `Http#send` for resolve/reject
-- Default driver
 - Add UrlPrefixExtension for prefixing all urls with a given string
