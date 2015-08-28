@@ -1,7 +1,7 @@
 {
   "name": "recite",
   "main": "index.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/justinhoward/recite",
   "authors": [
     "Justin Howard <jmhoward0@gmail.com>"
