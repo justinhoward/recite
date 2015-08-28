@@ -440,6 +440,20 @@ http.postJson('http://example.com/api/person', {name: 'Justin'}).send().then(fun
 });
 ```
 
+### UrlPrefixExtension
+
+The `UrlPrefixExtension` simply allows you to prefix all request URLs with a given string.
+You could use this to prepend your domain name or application path to your API requests to
+avoid duplicating it throughout your application.
+
+```javascript
+var http = new Http();
+http.addExtension(new UrlPrefixExtension('http://example.com'));
+
+http.get('/api/person').send();
+// this sends a request to http://example.com/api/person
+```
+
 ### Custom Extensions
 
 It's easy to create your own extensions. Extensions only require one method,
