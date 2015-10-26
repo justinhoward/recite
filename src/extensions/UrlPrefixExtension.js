@@ -45,7 +45,10 @@ proto.addListeners = function(dispatcher) {
   var self = this;
   dispatcher.addListener('http.request', function(event) {
     var request = event.getRequest();
-    request.setUrl(self.prefix + request.getUrl());
+    var url = request.getUrl();
+    if (!/^[a-z0-9]+:/i.test(url)) {
+      request.setUrl(self.prefix + url);
+    }
   });
 };
 

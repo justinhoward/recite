@@ -11,14 +11,23 @@ function OkDriver() {
 }
 
 describe('extensions/UrlPrefixExtension', function() {
-  it('adds a prefix to the request URL', function(done) {
+  it('adds a prefix to the request URL', function() {
     var http = new Http(new OkDriver());
     http.addExtension(new UrlPrefixExtension('http://example.com'));
 
     var request = http.get('/test');
     return http.send(request).then(function(response) {
       expect(response.getRequest().getUrl()).to.equal('http://example.com/test');
-      done();
+    });
+  });
+
+  it('does not prefix URLs with a scheme', function() {
+    var http = new Http(new OkDriver());
+    http.addExtension(new UrlPrefixExtension('http://example.com'));
+
+    var request = http.get('http://foobar.com');
+    return http.send(request).then(function(response) {
+      expect(response.getRequest().getUrl()).to.equal('http://foobar.com');
     });
   });
 });
