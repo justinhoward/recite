@@ -72,4 +72,24 @@ describe('messages/Headers', function() {
 
     expect(headers.all()).to.deep.equal({foo: 'foo val', Bar: 'bar val'});
   });
+
+  it('can get the content-type', function() {
+    var headers = new Headers();
+    headers.set('Content-Type', 'application/json');
+
+    expect(headers.getContentType()).to.equal('application/json');
+  });
+
+  it('can get the content-type if there are extra parameters', function() {
+    var headers = new Headers();
+    headers.set('Content-Type', 'application/json; encoding=utf-8');
+
+    expect(headers.getContentType()).to.equal('application/json');
+  });
+
+  it('returns an undefined content-type if none exists', function() {
+    var headers = new Headers();
+
+    expect(headers.getContentType()).to.equal(undefined);
+  });
 });

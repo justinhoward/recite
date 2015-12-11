@@ -263,6 +263,7 @@ var headers = request.getHeaders();
  - `all()`: Returns a plain object of header name/value pairs.
  - `clear()`: Empties the headers.
  - `setObject(object)`: Adds all the given name/value pairs in `object`. Does not clear existing headers.
+ - `getContentType`: Gets the content-type of the message if it is set.
 
 Header case is always maintained when stored, but the `get` method searches case-insensitively.
 This means you don't have to worry about case when using the `get` method, but the object returned

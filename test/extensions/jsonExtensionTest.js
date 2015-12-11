@@ -4,10 +4,10 @@ var JsonExtension = require('../../src/extensions/JsonExtension');
 var Http = require('../../src/Http');
 var Response = require('../../src/messages/Response');
 
-function OkDriver() {
+function OkDriver(contentType) {
   this.send = function(request, callback) {
     callback(new Response(request, 200, '{"status": "ok"}', {
-      'content-type': 'application/json'
+      'content-type': contentType || 'application/json'
     }));
   };
 }
@@ -67,5 +67,14 @@ describe('extensions/JsonExtension', function() {
     expect(request.getMethod()).to.equal('PUT');
     expect(request.getHeaders().get('content-type')).to.equal('application/json');
     expect(request.getHeaders().get('accept')).to.equal('application/json');
+  });
+
+  it('detects Content-Type with charset', function() {
+    var http = new Http(new OkDriver('application/json; charset=utf-8'));
+    http.addExtension(new JsonExtension());
+
+    return http.getJson('POST', '/test').send(function(response) {
+      expect(response.getContents()).to.deep.equal({status: 'ok'});
+    });
   });
 });

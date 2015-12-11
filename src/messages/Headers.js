@@ -117,4 +117,23 @@ proto.setObject = function(headers) {
   return this;
 };
 
+/**
+ * Get the content type of the message.
+ *
+ * The content-type header can contain multiple parameters,
+ * this returns only the mime-type parameter of the header.
+ *
+ * @method getContentType
+ * @memberof Http.Headers.prototype
+ * @return {string} The content type of the message
+ */
+proto.getContentType = function() {
+  var header = this.get('content-type');
+  if (!header) {
+    return;
+  }
+
+  return header.split(';')[0];
+};
+
 module.exports = Headers;

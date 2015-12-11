@@ -126,7 +126,7 @@ JsonExtension.requestJson = function(method, url, contents, headers) {
  */
 JsonExtension.httpRequestListener = function(event) {
   var request = event.getRequest();
-  if (request.getHeaders().get('content-type') === 'application/json') {
+  if (request.getHeaders().getContentType() === 'application/json') {
     var contents = request.getContents();
     if (isPlainObject(contents)) {
       request.setContents(JSON.stringify(contents));
@@ -151,7 +151,7 @@ JsonExtension.httpRequestListener = function(event) {
  */
 JsonExtension.httpResponseListener = function(event) {
   var response = event.getResponse();
-  if (response.getHeaders().get('content-type') === 'application/json') {
+  if (response.getHeaders().getContentType() === 'application/json') {
     var contents = response.getContents();
     if (typeof contents === 'string') {
       response.setContents(JSON.parse(contents));
