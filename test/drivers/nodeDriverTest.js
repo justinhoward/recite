@@ -106,12 +106,11 @@ describe('drivers/NodeDriver/http', function() {
 
   it('can send a Stream instance', function(done) {
     var driver = new NodeDriver();
-    var readable = new stream.Readable({
-      read: function() {
-        this.push('foobar');
-        this.push(null);
-      }
-    });
+    var readable = new stream.Readable();
+    readable._read = function() {
+      this.push('foobar');
+      this.push(null);
+    };
     var request = new Request('POST', 'http://localhost:8763/good', readable);
     driver.send(request, function(response) {
       expect(response.getContents()).to.equal('foobar');

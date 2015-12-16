@@ -23,12 +23,11 @@ describe('extensions/FormExtension', function() {
     this.testData = function(request, data, done) {
       this.http.send(request).then(function(response) {
         var contents = '';
-        var writable = new stream.Writable({
-          write: function(chunk, encoding, next) {
-            contents += chunk.toString();
-            next();
-          }
-        });
+        var writable = new stream.Writable();
+        writable._write = function(chunk, encoding, next) {
+          contents += chunk.toString();
+          next();
+        };
 
         writable.on('finish', function() {
           Object.keys(data).forEach(function(key) {
