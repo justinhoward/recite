@@ -3,6 +3,7 @@ var Response = require('../messages/Response');
 var http = require('http');
 var https = require('https');
 var url = require('url');
+var stream = require('stream');
 
 /**
  * Driver for the node `http` and `https` modules
@@ -67,10 +68,15 @@ proto.request = function(library, request, options, callback) {
 
   var contents = request.getContents();
   if (typeof contents !== 'undefined' && contents !== null) {
-    nodeRequest.write(contents);
+    if (contents instanceof stream.Stream) {
+      contents.pipe(nodeRequest);
+    } else {
+      nodeRequest.write(contents);
+      nodeRequest.end();
+    }
+  } else {
+    nodeRequest.end();
   }
-
-  nodeRequest.end();
 };
 
 proto.handleError = function(request, error, callback) {

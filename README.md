@@ -441,6 +441,38 @@ http.postJson('http://example.com/api/person', {name: 'Justin'}).send().then(fun
 });
 ```
 
+### FormExtension
+
+The `FormExtension` adds `multipart/form-data` encoding. If the `content-type`
+of a request is set, the body of the request will be automatically encoded.
+
+```javascript
+http.post('http://example.com/api/person', {name: 'Justin'}, {
+  'content-type': 'multipart/form-data'
+}).send();
+```
+
+Also, like `JsonExtension`, there are shortcuts for `postForm` and
+`requestForm`.
+
+```javascript
+http.postForm('http://example.com/api/person', {name: 'Justin'}).send();
+http.requestForm('PUT', 'http://example.com/api/person/1', {name: 'Justin Howard'}).send();
+```
+
+You can also build a `FormData` instance manually and send that. In the browser,
+use the native `FormData` class, in node, use the `form-data` npm package.
+
+```javascript
+// If you're in node, require the form-data package
+// In the browser FormData is available globally
+var FormData = require('form-data');
+
+var form = new FormData();
+form.append('name', 'Justin');
+http.postForm('http://example.com/api/person', form).send();
+```
+
 ### UrlPrefixExtension
 
 The `UrlPrefixExtension` simply allows you to prefix all request URLs with a given string.

@@ -36,6 +36,7 @@ Http.events = {
  * @namespace Http.extensions
  */
 Http.extensions = {
+  FormExtension: require('./src/extensions/FormExtension'),
   JsonExtension: require('./src/extensions/JsonExtension'),
   UrlPrefixExtension: require('./src/extensions/UrlPrefixExtension')
 };

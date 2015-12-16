@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var fs = require('fs');
 var shared = require('./sharedIndex');
 var Http = require('../src/Http');
+var FormData = require('form-data');
 Http.Promise = global.Promise || require('es6-promise').Promise;
 
 describe('index', function() {
@@ -21,6 +22,10 @@ describe('index', function() {
 
   it('has a default driver of NodeDriver', function() {
     expect(this.index.getDefaultDriver()).to.be.instanceOf(this.index.drivers.NodeDriver);
+  });
+
+  it('sets FormExtension.FormData', function() {
+    expect(this.index.extensions.FormExtension.FormData).to.equal(FormData);
   });
 
   shared.shouldBehaveLikeIndex();

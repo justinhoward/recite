@@ -25,6 +25,7 @@ exports.shouldBehaveLikeIndex = function() {
   });
 
   it('has extensions', function() {
+    expect(this.index.extensions.FormExtension).to.exist();
     expect(this.index.extensions.JsonExtension).to.exist();
     expect(this.index.extensions.UrlPrefixExtension).to.exist();
   });
