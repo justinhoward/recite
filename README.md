@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/justinhoward/recite.svg)](https://travis-ci.org/justinhoward/recite)
 [![Code Climate](https://codeclimate.com/github/justinhoward/recite/badges/gpa.svg)](https://codeclimate.com/github/justinhoward/recite)
 [![Test Coverage](https://codeclimate.com/github/justinhoward/recite/badges/coverage.svg)](https://codeclimate.com/github/justinhoward/recite)
+[![Inline docs](http://inch-ci.org/github/justinhoward/recite.svg?branch=master)](http://inch-ci.org/github/justinhoward/recite)
 
 ## Installation
 
