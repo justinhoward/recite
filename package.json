@@ -8,7 +8,9 @@
     "test": "mocha --recursive",
     "cover": "istanbul cover _mocha -- --recursive",
     "publish-coverage": "codeclimate < coverage/lcov.info",
-    "release": "gulp release"
+    "release": "gulp release",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,8 @@
   "dependencies": {
     "form-data": "^1.0.0-rc3",
     "hoopla": "^0.1.1",
-    "inherits": "^2.0.1"
-  }
+    "inherits": "^2.0.1",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
